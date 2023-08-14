@@ -1,0 +1,1409 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+
+    
+            
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Critical JS -->
+    <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'enhanced')})(document.documentElement)</script>
+    <script>(function(win,undefined){win.PP=win.PP||{};win.PP.utils=win.PP.utils||{};var PP=win.PP;// loadJS: load a JS file asynchronously. Included from https://github.com/filamentgroup/loadJS/
+function loadJS(src,cb){"use strict";var ref=window.document.getElementsByTagName("script")[0];var script=window.document.createElement("script");script.src=src;script.async=true;ref.parentNode.insertBefore(script,ref);if(cb&&typeof cb==="function"){script.onload=cb}return script}PP.utils.loadJS=loadJS;// cookie function from https://github.com/filamentgroup/cookie/
+function cookie(name,value,days){// if value is undefined, get the cookie value
+if(value===undefined){var cookiestring="; "+window.document.cookie;var cookies=cookiestring.split("; "+name+"=");if(cookies.length===2){return cookies.pop().split(";").shift()}return null}else{var expires;var domain;// if value is a false boolean, we'll treat that as a delete
+if(value===false){days=-1}if(days){var date=new Date;date.setTime(date.getTime()+days*24*60*60*1000);expires="; expires="+date.toGMTString()}else{expires=""}// check if we're in dev, if not, lets make it a domain-wide cookie
+if(location.hostname=="localhost"||location.hostname=="127.0.0.1"){domain=""}else{domain="; domain=github.com/reportermarina"}window.document.cookie=name+"="+value+expires+domain+"; path=/"}}// expose it
+PP.utils.cookie=cookie;// basic logging function
+function log(logLine){const logOn=new URLSearchParams(window.location.search).get("__pp-debug");if(logOn!==null){console.log(logLine)}}// expose it
+PP.utils.log=log;// generic event throttler using requestAnimationFrame
+function rafEvent(type,name,obj){obj=obj||win;var running=false;var func=function(){if(running){return}running=true;requestAnimationFrame(function(){obj.dispatchEvent(new CustomEvent(name));running=false})};obj.addEventListener(type,func)}PP.utils.rafEvent=rafEvent;PP.utils.rafEvent("resize","rafResize");PP.utils.rafEvent("scroll","rafScroll");// Create a series of breakpoints corresponding to the ones in css/config/_column-settings.scss
+// -->
+// Usage:
+//
+// 1. Check if breakpoint condition matches
+//    if (PP.utils.aboveBreakpoint("lg").matches) { console.log("Is Desktop"); }
+//    if (PP.utils.belowBreakpoint("lg").matches) { console.log("Is Mobile"); }
+//
+// 2. Listener that triggers when breakpoint condition changes
+//    aboveBreakpoint("lg").addEventListener("change", function () { console.log("Mobile/Desktop breakpoint changed."); });
+const breakpoints={xs:0,sm:36,md:48,lg:60,xl:78,xxl:88};PP.utils.breakpoints=breakpoints;function aboveBreakpoint(value){return window.matchMedia(`(min-width: ${PP.utils.breakpoints[value]}em)`)}function belowBreakpoint(value){return window.matchMedia(`(max-width: ${PP.utils.breakpoints[value]}em)`)}PP.utils.aboveBreakpoint=aboveBreakpoint;PP.utils.belowBreakpoint=belowBreakpoint})(this);;(function(){var undefined;var VERSION="4.17.5";var FUNC_ERROR_TEXT="Expected a function";var NAN=0/0;var nullTag="[object Null]",symbolTag="[object Symbol]",undefinedTag="[object Undefined]";var reTrim=/^\s+|\s+$/g;var reIsBadHex=/^[-+]0x[0-9a-f]+$/i;var reIsBinary=/^0b[01]+$/i;var reIsOctal=/^0o[0-7]+$/i;var freeParseInt=parseInt;var freeGlobal=typeof global=="object"&&global&&global.Object===Object&&global;var freeSelf=typeof self=="object"&&self&&self.Object===Object&&self;var root=freeGlobal||freeSelf||Function("return this")();var freeExports=typeof exports=="object"&&exports&&!exports.nodeType&&exports;var freeModule=freeExports&&typeof module=="object"&&module&&!module.nodeType&&module;var objectProto=Object.prototype;var hasOwnProperty=objectProto.hasOwnProperty;var nativeObjectToString=objectProto.toString;var Symbol=root.Symbol,symToStringTag=Symbol?Symbol.toStringTag:undefined;var nativeMax=Math.max,nativeMin=Math.min;var realNames={};function lodash(){}function baseGetTag(value){if(value==null){return value===undefined?undefinedTag:nullTag}return symToStringTag&&symToStringTag in Object(value)?getRawTag(value):objectToString(value)}function getRawTag(value){var isOwn=hasOwnProperty.call(value,symToStringTag),tag=value[symToStringTag];try{value[symToStringTag]=undefined;var unmasked=true}catch(e){}var result=nativeObjectToString.call(value);if(unmasked){if(isOwn){value[symToStringTag]=tag}else{delete value[symToStringTag]}}return result}function objectToString(value){return nativeObjectToString.call(value)}var now=function(){return root.Date.now()};function debounce(func,wait,options){var lastArgs,lastThis,maxWait,result,timerId,lastCallTime,lastInvokeTime=0,leading=false,maxing=false,trailing=true;if(typeof func!="function"){throw new TypeError(FUNC_ERROR_TEXT)}wait=toNumber(wait)||0;if(isObject(options)){leading=!!options.leading;maxing="maxWait"in options;maxWait=maxing?nativeMax(toNumber(options.maxWait)||0,wait):maxWait;trailing="trailing"in options?!!options.trailing:trailing}function invokeFunc(time){var args=lastArgs,thisArg=lastThis;lastArgs=lastThis=undefined;lastInvokeTime=time;result=func.apply(thisArg,args);return result}function leadingEdge(time){lastInvokeTime=time;timerId=setTimeout(timerExpired,wait);return leading?invokeFunc(time):result}function remainingWait(time){var timeSinceLastCall=time-lastCallTime,timeSinceLastInvoke=time-lastInvokeTime,timeWaiting=wait-timeSinceLastCall;return maxing?nativeMin(timeWaiting,maxWait-timeSinceLastInvoke):timeWaiting}function shouldInvoke(time){var timeSinceLastCall=time-lastCallTime,timeSinceLastInvoke=time-lastInvokeTime;return lastCallTime===undefined||timeSinceLastCall>=wait||timeSinceLastCall<0||maxing&&timeSinceLastInvoke>=maxWait}function timerExpired(){var time=now();if(shouldInvoke(time)){return trailingEdge(time)}timerId=setTimeout(timerExpired,remainingWait(time))}function trailingEdge(time){timerId=undefined;if(trailing&&lastArgs){return invokeFunc(time)}lastArgs=lastThis=undefined;return result}function cancel(){if(timerId!==undefined){clearTimeout(timerId)}lastInvokeTime=0;lastArgs=lastCallTime=lastThis=timerId=undefined}function flush(){return timerId===undefined?result:trailingEdge(now())}function debounced(){var time=now(),isInvoking=shouldInvoke(time);lastArgs=arguments;lastThis=this;lastCallTime=time;if(isInvoking){if(timerId===undefined){return leadingEdge(lastCallTime)}if(maxing){timerId=setTimeout(timerExpired,wait);return invokeFunc(lastCallTime)}}if(timerId===undefined){timerId=setTimeout(timerExpired,wait)}return result}debounced.cancel=cancel;debounced.flush=flush;return debounced}function throttle(func,wait,options){var leading=true,trailing=true;if(typeof func!="function"){throw new TypeError(FUNC_ERROR_TEXT)}if(isObject(options)){leading="leading"in options?!!options.leading:leading;trailing="trailing"in options?!!options.trailing:trailing}return debounce(func,wait,{leading:leading,maxWait:wait,trailing:trailing})}function isObject(value){var type=typeof value;return value!=null&&(type=="object"||type=="function")}function isObjectLike(value){return value!=null&&typeof value=="object"}function isSymbol(value){return typeof value=="symbol"||isObjectLike(value)&&baseGetTag(value)==symbolTag}function toNumber(value){if(typeof value=="number"){return value}if(isSymbol(value)){return NAN}if(isObject(value)){var other=typeof value.valueOf=="function"?value.valueOf():value;value=isObject(other)?other+"":other}if(typeof value!="string"){return value===0?value:+value}value=value.replace(reTrim,"");var isBinary=reIsBinary.test(value);return isBinary||reIsOctal.test(value)?freeParseInt(value.slice(2),isBinary?2:8):reIsBadHex.test(value)?NAN:+value}lodash.debounce=debounce;lodash.throttle=throttle;lodash.isObject=isObject;lodash.isObjectLike=isObjectLike;lodash.isSymbol=isSymbol;lodash.now=now;lodash.toNumber=toNumber;lodash.VERSION=VERSION;if(typeof define=="function"&&typeof define.amd=="object"&&define.amd){root._=lodash;define(function(){return lodash})}else if(freeModule){(freeModule.exports=lodash)._=lodash;freeExports._=lodash}else{root._=lodash}}).call(this);;/* eslint-disable */ /*! lazysizes - v5.3.0 */!function(e){const t=function(u,D,f){let k;let H;if(function(){let e;const t={lazyClass:"lazyload",loadedClass:"lazyloaded",loadingClass:"lazyloading",preloadClass:"lazypreload",errorClass:"lazyerror",autosizesClass:"lazyautosizes",fastLoadedClass:"ls-is-cached",iframeLoadMode:0,srcAttr:"data-src",srcsetAttr:"data-srcset",sizesAttr:"data-sizes",minSize:40,customMedia:{},init:true,expFactor:1.5,hFac:0.8,loadMode:2,loadHidden:true,ricTimeout:0,throttleDelay:125};H=u.lazySizesConfig||u.lazysizesConfig||{};for(e in t){if(!(e in H)){H[e]=t[e]}}}(),!D||!D.getElementsByClassName){return{init(){},cfg:H,noSupport:true}}const O=D.documentElement;const i=u.HTMLPictureElement;const P="addEventListener";const $="getAttribute";const q=u[P].bind(u);const I=u.setTimeout;const U=u.requestAnimationFrame||I;const o=u.requestIdleCallback;const j=/^picture$/i;const r=["load","error","lazyincluded","_lazyloaded"];const a={};const G=Array.prototype.forEach;const J=function(e,t){if(!a[t]){a[t]=new RegExp(`(\\s|^)${t}(\\s|$)`)}return a[t].test(e[$]("class")||"")&&a[t]};const K=function(e,t){if(!J(e,t)){e.setAttribute("class",`${(e[$]("class")||"").trim()} ${t}`)}};const Q=function(e,t){let a;if(a=J(e,t)){e.setAttribute("class",(e[$]("class")||"").replace(a," "))}};var V=function(t,a,e){const i=e?P:"removeEventListener";if(e){V(t,a)}r.forEach(function(e){t[i](e,a)})};const X=function(e,t,a,i,r){const n=D.createEvent("Event");if(!a){a={}}a.instance=k;n.initEvent(t,!i,!r);n.detail=a;e.dispatchEvent(n);return n};const Y=function(e,t){let a;if(!i&&(a=u.picturefill||H.pf)){if(t&&t.src&&!e[$]("srcset")){e.setAttribute("srcset",t.src)}a({reevaluate:true,elements:[e]})}else if(t&&t.src){e.src=t.src}};const Z=function(e,t){return(getComputedStyle(e,null)||{})[t]};const s=function(e,t,a){a=a||e.offsetWidth;while(a<H.minSize&&t&&!e._lazysizesWidth){a=t.offsetWidth;t=t.parentNode}return a};const ee=function(){let a;let i;const t=[];const r=[];let n=t;const s=function(){const e=n;n=t.length?r:t;a=true;i=false;while(e.length){e.shift()()}a=false};const e=function(e,t){if(a&&!t){e.apply(this,arguments)}else{n.push(e);if(!i){i=true;(D.hidden?I:U)(s)}}};e._lsFlush=s;return e}();const te=function(a,e){return e?function(){ee(a)}:function(){const e=this;const t=arguments;ee(function(){a.apply(e,t)})}};const ae=function(e){let a;let i=0;const r=H.throttleDelay;let n=H.ricTimeout;const t=function(){a=false;i=f.now();e()};const s=o&&n>49?function(){o(t,{timeout:n});if(n!==H.ricTimeout){n=H.ricTimeout}}:te(function(){I(t)},true);return function(e){let t;if(e=e===true){n=33}if(a){return}a=true;t=r-(f.now()-i);if(t<0){t=0}if(e||t<9){s()}else{I(s,t)}}};const ie=function(e){let t;let a;const i=99;const r=function(){t=null;e()};var n=function(){const e=f.now()-a;if(e<i){I(n,i-e)}else{(o||r)(r)}};return function(){a=f.now();if(!t){t=I(n,i)}}};const e=function(){let v;let m;let c;let h;let e;let y;let z;let g;let p;let C;let b;let A;const n=/^img$/i;const d=/^iframe$/i;const E="onscroll"in u&&!/(gle|ing)bot/.test(navigator.userAgent);const _=0;let w=0;let M=0;let N=-1;const L=function(e){M--;if(!e||M<0||!e.target){M=0}};const x=function(e){if(A==null){A=Z(D.body,"visibility")=="hidden"}return A||!(Z(e.parentNode,"visibility")=="hidden"&&Z(e,"visibility")=="hidden")};const W=function(e,t){let a;let i=e;let r=x(e);g-=t;b+=t;p-=t;C+=t;while(r&&(i=i.offsetParent)&&i!=D.body&&i!=O){r=(Z(i,"opacity")||1)>0;if(r&&Z(i,"overflow")!="visible"){a=i.getBoundingClientRect();r=C>a.left&&p<a.right&&b>a.top-1&&g<a.bottom+1}}return r};const t=function(){let e;let t;let a;let i;let r;let n;let s;let o;let l;let u;let f;let c;const d=k.elements;if((h=H.loadMode)&&M<8&&(e=d.length)){t=0;N++;for(;t<e;t++){if(!d[t]||d[t]._lazyRace){continue}if(!E||k.prematureUnveil&&k.prematureUnveil(d[t])){R(d[t]);continue}if(!(o=d[t][$]("data-expand"))||!(n=o*1)){n=w}if(!u){u=!H.expand||H.expand<1?O.clientHeight>500&&O.clientWidth>500?500:370:H.expand;k._defEx=u;f=u*H.expFactor;c=H.hFac;A=null;if(w<f&&M<1&&N>2&&h>2&&!D.hidden){w=f;N=0}else if(h>1&&N>1&&M<6){w=u}else{w=_}}if(l!==n){y=innerWidth+n*c;z=innerHeight+n;s=n*-1;l=n}a=d[t].getBoundingClientRect();if((b=a.bottom)>=s&&(g=a.top)<=z&&(C=a.right)>=s*c&&(p=a.left)<=y&&(b||C||p||g)&&(H.loadHidden||x(d[t]))&&(m&&M<3&&!o&&(h<3||N<4)||W(d[t],n))){R(d[t]);r=true;if(M>9){break}}else if(!r&&m&&!i&&M<4&&N<4&&h>2&&(v[0]||H.preloadAfterLoad)&&(v[0]||!o&&(b||C||p||g||d[t][$](H.sizesAttr)!="auto"))){i=v[0]||d[t]}}if(i&&!r){R(i)}}};const a=ae(t);const S=function(e){const t=e.target;if(t._lazyCache){delete t._lazyCache;return}L(e);K(t,H.loadedClass);Q(t,H.loadingClass);V(t,B);X(t,"lazyloaded")};const i=te(S);var B=function(e){i({target:e.target})};const T=function(e,t){const a=e.getAttribute("data-load-mode")||H.iframeLoadMode;if(a==0){e.contentWindow.location.replace(t)}else if(a==1){e.src=t}};const F=function(e){let t;const a=e[$](H.srcsetAttr);if(t=H.customMedia[e[$]("data-media")||e[$]("media")]){e.setAttribute("media",t)}if(a){e.setAttribute("srcset",a)}};const s=te(function(t,e,a,i,r){let n;let s;let o;let l;let u;let f;if(!(u=X(t,"lazybeforeunveil",e)).defaultPrevented){if(i){if(a){K(t,H.autosizesClass)}else{t.setAttribute("sizes",i)}}s=t[$](H.srcsetAttr);n=t[$](H.srcAttr);if(r){o=t.parentNode;l=o&&j.test(o.nodeName||"")}f=e.firesLoad||"src"in t&&(s||n||l);u={target:t};K(t,H.loadingClass);if(f){clearTimeout(c);c=I(L,2500);V(t,B,true)}if(l){G.call(o.getElementsByTagName("source"),F)}if(s){t.setAttribute("srcset",s)}else if(n&&!l){if(d.test(t.nodeName)){T(t,n)}else{t.src=n}}if(r&&(s||l)){Y(t,{src:n})}}if(t._lazyRace){delete t._lazyRace}Q(t,H.lazyClass);ee(function(){const e=t.complete&&t.naturalWidth>1;if(!f||e){if(e){K(t,H.fastLoadedClass)}S(u);t._lazyCache=true;I(function(){if("_lazyCache"in t){delete t._lazyCache}},9)}if(t.loading=="lazy"){M--}},true)});var R=function(e){if(e._lazyRace){return}let t;const a=n.test(e.nodeName);const i=a&&(e[$](H.sizesAttr)||e[$]("sizes"));const r=i=="auto";if((r||!m)&&a&&(e[$]("src")||e.srcset)&&!e.complete&&!J(e,H.errorClass)&&J(e,H.lazyClass)){return}t=X(e,"lazyunveilread").detail;if(r){re.updateElem(e,true,e.offsetWidth)}e._lazyRace=true;M++;s(e,t,r,i,a)};const r=ie(function(){H.loadMode=3;a()});const o=function(){if(H.loadMode==3){H.loadMode=2}r()};var l=function(){if(m){return}if(f.now()-e<999){I(l,999);return}m=true;H.loadMode=3;a();q("scroll",o,true)};return{_(){e=f.now();k.elements=D.getElementsByClassName(H.lazyClass);v=D.getElementsByClassName(`${H.lazyClass} ${H.preloadClass}`);q("scroll",a,true);q("resize",a,true);q("pageshow",function(e){if(e.persisted){const t=D.querySelectorAll(`.${H.loadingClass}`);if(t.length&&t.forEach){U(function(){t.forEach(function(e){if(e.complete){R(e)}})})}}});if(u.MutationObserver){new MutationObserver(a).observe(O,{childList:true,subtree:true,attributes:true})}else{O[P]("DOMNodeInserted",a,true);O[P]("DOMAttrModified",a,true);setInterval(a,999)}q("hashchange",a,true);["focus","mouseover","click","load","transitionend","animationend"].forEach(function(e){D[P](e,a,true)});if(/d$|^c/.test(D.readyState)){l()}else{q("load",l);D[P]("DOMContentLoaded",a);I(l,2e4)}if(k.elements.length){t();ee._lsFlush()}else{a()}},checkElems:a,unveil:R,_aLSL:o}}();var re=function(){let a;const n=te(function(e,t,a,i){let r;let n;let s;e._lazysizesWidth=i;i+="px";e.setAttribute("sizes",i);if(j.test(t.nodeName||"")){r=t.getElementsByTagName("source");for(n=0,s=r.length;n<s;n++){r[n].setAttribute("sizes",i)}}if(!a.detail.dataAttr){Y(e,a.detail)}});const i=function(e,t,a){let i;const r=e.parentNode;if(r){a=s(e,r,a);i=X(e,"lazybeforesizes",{width:a,dataAttr:!!t});if(!i.defaultPrevented){a=i.detail.width;if(a&&a!==e._lazysizesWidth){n(e,r,i,a)}}}};const e=function(){let e;const t=a.length;if(t){e=0;for(;e<t;e++){i(a[e])}}};const t=ie(e);return{_(){a=D.getElementsByClassName(H.autosizesClass);q("resize",t)},checkElems:t,updateElem:i}}();var t=function(){if(!t.i&&D.getElementsByClassName){t.i=true;re._();e._()}};return I(function(){H.init&&t()}),k={cfg:H,autoSizer:re,loader:e,init:t,uP:Y,aC:K,rC:Q,hC:J,fire:X,gW:s,rAF:ee}}(e,e.document,Date);e.lazySizes=t,typeof module==="object"&&module.exports&&(module.exports=t)}(typeof window!=="undefined"?window:{});;/* eslint-disable */ /*! lazysizes - v5.3.2 */!function(e,t){var a=function(){t(e.lazySizes),e.removeEventListener("lazyunveilread",a,!0)};t=t.bind(null,e,e.document),"object"==typeof module&&module.exports?t(require("lazysizes")):"function"==typeof define&&define.amd?define(["lazysizes"],t):e.lazySizes?a():e.addEventListener("lazyunveilread",a,!0)}(window,function(e,i,o){"use strict";var l,d,u={};function s(e,t,a){var n,r;u[e]||(n=i.createElement(t?"link":"script"),r=i.getElementsByTagName("script")[0],t?(n.rel="stylesheet",n.href=e):(n.onload=function(){n.onerror=null,n.onload=null,a()},n.onerror=n.onload,n.src=e),u[e]=!0,u[n.src||n.href]=!0,r.parentNode.insertBefore(n,r))}i.addEventListener&&(l=function(e,t){var a=i.createElement("img");a.onload=function(){a.onload=null,a.onerror=null,a=null,t()},a.onerror=a.onload,a.src=e,a&&a.complete&&a.onload&&a.onload()},addEventListener("lazybeforeunveil",function(e){var t,a,n;if(e.detail.instance==o&&!e.defaultPrevented){var r=e.target;if("none"==r.preload&&(r.preload=r.getAttribute("data-preload")||"auto"),null!=r.getAttribute("data-autoplay"))if(r.getAttribute("data-expand")&&!r.autoplay)try{r.play()}catch(e){}else requestAnimationFrame(function(){r.setAttribute("data-expand","-10"),o.aC(r,o.cfg.lazyClass)});(t=r.getAttribute("data-link"))&&s(t,!0),(t=r.getAttribute("data-script"))&&(e.detail.firesLoad=!0,s(t,null,function(){e.detail.firesLoad=!1,o.fire(r,"_lazyloaded",{},!0,!0)})),(t=r.getAttribute("data-require"))&&(o.cfg.requireJs?o.cfg.requireJs([t]):s(t)),(a=r.getAttribute("data-bg"))&&(e.detail.firesLoad=!0,l(a,function(){r.style.backgroundImage="url("+(d.test(a)?JSON.stringify(a):a)+")",e.detail.firesLoad=!1,o.fire(r,"_lazyloaded",{},!0,!0)})),(n=r.getAttribute("data-poster"))&&(e.detail.firesLoad=!0,l(n,function(){r.poster=n,e.detail.firesLoad=!1,o.fire(r,"_lazyloaded",{},!0,!0)}))}},!(d=/\(|\)|\s|'/)))});
+//# sourceMappingURL=initial.js.map
+</script>
+
+        <script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        'contentType': 'Item', // updated taxonomy TK
+        'publicationDate': 'August 13, 2022 18:00:00',
+        'articleTopic': 'Analysis',
+        'articleTitle': 'Broker Fees',
+        'authorName': 'Marina Villeneuve',
+        'seriesName': '',
+        'contentRegion': 'Boston',
+        'contentLanguage': 'en',
+        'craftId' : '1632640',
+        'articleVersion' : 'V5',
+        'contentLocation' : '',
+        'storyType': 'legacy',
+        'impact': "false"
+    });
+</script>
+
+    <!-- PRECONNECT -->
+        <link href="" rel="preconnect">
+    <link href="" rel="dns-prefetch">
+        <link href="" rel="dns-prefetch">
+    <link href="" rel="dns-prefetch">
+
+    <!-- STYLES -->
+    <link rel="stylesheet" href="https://assets.propublica.org/static/prod/v5/css/main.bf1fe0b1.css">
+
+    #<!-- OTHER -->
+    #        <link rel="amphtml" href="https://www.propublica.org/article/afghanistan-night-raids-zero-units-lynzy-billing/amp">
+            
+    <style type="text/css">
+   html.force-dark-mode .bg-white {
+      --color-bg: #11100F;
+    }
+
+    html.force-dark-mode .opener--same-color-in-dark-mode{
+      --opener-dark: #11100F;
+    }
+
+    .opener--grid.opener--has-background-black::after{
+      background-color: #11100F;
+    }
+
+    @media screen and (min-width: 48em) {
+      html.force-dark-mode .text-dark .site-header--scrolled:not(.site-header--expanded) .site-header__inner-wrap-compact::before {
+        background-color: #11100F;
+      }
+    }
+    
+    @media screen and (max-width: 48em) {
+      html.force-dark-mode .text-dark .site-header  {
+        background-color: #11100F;
+      }
+    }
+
+/* Accent Colors */ 
+
+html:not(.force-dark-mode) .accent-orange{
+  --color-accent-90:var(--warm-10);
+--color-accent-80:var(--warm-20);
+--color-accent-70:var(--warm-30);
+--color-accent-60:var(--warm-40);
+--color-accent-50:var(--warm-50);
+--color-accent-40:var(--warm-60);
+--color-accent-30:var(--warm-70);
+--color-accent-20:var(--warm-80);
+--color-accent-10:var(--warm-90);
+}
+
+html.force-dark-mode .accent-orange{
+--color-accent-90:var(--warm-10);
+--color-accent-80:var(--warm-20);
+--color-accent-70:var(--warm-30);
+--color-accent-60:var(--warm-40);
+--color-accent-50:var(--warm-50);
+--color-accent-40:var(--warm-60);
+--color-accent-30:var(--warm-70);
+--color-accent-20:var(--warm-80);
+--color-accent-10:var(--warm-90);
+}
+
+.accent-orange{
+  --color-accent-90:var(--warm-10);
+--color-accent-80:var(--warm-20);
+--color-accent-70:var(--warm-30);
+--color-accent-60:var(--warm-40);
+--color-accent-50:var(--warm-50);
+--color-accent-40:var(--warm-60);
+--color-accent-30:var(--warm-70);
+--color-accent-20:var(--warm-80);
+--color-accent-10:var(--warm-90);
+}
+
+/* Pull Quote */ 
+html.force-dark-mode .bb-pull-quote{
+color:var(--warm-30);
+}
+
+.bb-pull-quote__text::before{
+display:none;
+}
+
+.bb-pull-quote__text .hide{
+  display: inline!important;
+}
+
+.bb-pull-quote__text p{
+  text-transform: uppercase;
+  letter-spacing: 3px; 
+  font-weight: 400;
+  font-size: var(--scale0);
+  line-height: var(--line-height-1);
+}
+
+
+/* Opener Styling */ 
+    #scroll-opener {
+  position: relative;
+}
+
+.bb-image.size07 {
+  margin-bottom: var(--vert-rhythm-sm);
+}
+
+/* Scrolly Opener */ 
+
+#scroll-opener .opener-scroll-line {
+width: 100%;
+    display: flex;
+    height: 10vh;
+    position: absolute;
+    top: 83vh;
+    left: 0px;
+    z-index: 11;
+    flex-direction: column;
+    opacity: .7;
+      transition: opacity 1s ease-in-out;
+-webkit-transition: opacity 1s ease-in-out;
+-moz-transition: opacity 1s ease-in-out;
+-o-transition: opacity 1s ease-in-out;
+}
+
+#scroll-opener .scrolly-text {
+    position: relative;
+    padding: 0;
+    margin: 0 auto;
+    top: -40vh;
+    color: yellow; /* Add this line to change the text color */
+  }
+
+
+#scroll-opener .opener-scroll-line.hide {
+  opacity: 0;
+}
+
+#scroll-opener .opener-scroll-line-el {
+  width: 50%;
+    border-right: 1px solid var(--warm-10);
+    height: 100%;
+    margin-bottom: 10px;
+}
+
+#scroll-opener .opener-scroll-line-text {
+  font-family: Graphik, sans-serif;
+  font-size: var(--scale-3);
+  color: red;
+  letter-spacing: .05rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.opener--grid .opener__art, .opener__art-wrapper, .opener {
+  height: 460vh;
+
+}
+
+.opener--grid {
+  height: fit-content;
+  margin-bottom: 20px;
+}
+
+.opener__hed {
+  font-size: var(--scale4);
+}
+
+.opener #scroll-opener .headline-holder .opener__topic-title-dek-wrapper {
+  width: 90%;
+  max-width: 700px;
+  margin: auto;
+}
+
+
+
+@media screen and (min-width: 88em) {
+  .opener__hed {
+  font-size: var(--scale5);
+}
+}
+
+#scroll-opener, #scroll-opener .scrolly {
+  height: 460vh;
+}
+
+#scroll-opener .scrolly-text {
+  position: relative;
+  padding: 0;
+  margin: 0 auto;
+  top: -40vh;
+}
+
+  
+#scroll-opener .scrolly-image {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  background-color: #141110;
+  z-index: 0;
+  height: 100vh;
+  top: 0px;
+}
+
+#scroll-opener .scrolly-image div {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+}
+#scroll-opener .scrolly-image video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+   opacity: 0;
+      transition: opacity 0.25s ease-in-out;
+   -webkit-transition: opacity 0.25s ease-in-out;
+   -moz-transition: opacity 0.25s ease-in-out;
+   -o-transition: opacity 0.25s ease-in-out;
+}
+
+
+    #scroll-opener .scrolly-image .img-3 video {
+      z-index: 2;
+      object-position: 50% 80%;
+    }
+
+    #scroll-opener .scrolly-image .img-1 video  {
+      object-position: 50% 0%;
+    }
+
+    #scroll-opener .scrolly-image video.active {
+      opacity: 1;
+    }
+
+
+#scroll-opener .step:first-child {
+  margin-top: 5vh;
+  height: auto;
+
+}
+
+#scroll-opener .step.step1 {
+  margin-top: 72vh;
+}
+
+#scroll-opener .step {
+
+height: 80vh;
+  
+}
+
+
+#scroll-opener .step:last-child {
+  height: 20vh;
+}
+
+#scroll-opener .step p {
+  font-family: var(--fonts-sans);
+  font-weight: 700;
+  width: 90%;
+  margin: 0 auto;
+  font-size: var(--scale1);
+  max-width: 600px;
+  line-height: var(--line-height-1);
+  text-align: center;
+  color: var(--warm-10);
+  filter: drop-shadow(2px 2px 10px black);
+  
+}
+
+
+#scroll-opener .step p:first-child{
+  opacity: 1;
+}
+
+
+#scroll-opener .scrolly-image video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.25s ease-in-out;
+   -webkit-transition: opacity 0.25s ease-in-out;
+   -moz-transition: opacity 0.25s ease-in-out;
+   -o-transition: opacity 0.25s ease-in-out;
+    }
+
+    #scroll-opener .scrolly-image video.active {
+      opacity: 1;
+    }
+    
+
+
+
+
+
+#scroll-opener .step > .headline-holder {
+  width: 90%;
+  max-width: 750px;
+  margin: auto;
+}
+
+
+.article-meta-1__byline a:hover {
+  text-decoration: underline;
+}
+.article-body>*:not([class]) a, .article-body>*:not([class]) a:visited, .article-body>.spaced-list a, .article-body>.spaced-list a:visited {
+  color: var(--color-accent-80);
+  text-decoration-color: var(--color-accent-40);
+}
+
+
+
+.opener .opener__topic-title-dek-wrapper{
+  display: none;
+}
+
+.opener__dek .opener__dek--match-text-column{
+  display: none;
+}
+
+.opener .headline-holder .opener__topic-title-dek-wrapper, .content .opener--grid .headline-holder{
+  display: block;
+  text-align: center;
+}
+
+.opener .attribution__caption, .opener .attribution__credit{
+  display: none;
+}
+
+
+.opener__dek {
+      display: none;
+}
+.opener #scroll-opener .headline-holder span.subhed {
+    color: var(--opener-light);
+    letter-spacing: .05rem;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: var(--fonts-sans);
+    font-size: var(--scale-2);
+    
+}
+
+@media only screen and (max-width: 36rem) {
+
+  #scroll-opener .opener-scroll-line {
+    top: 75vh;
+  }
+}
+
+/* HR */ 
+
+.afghan-end{
+display: block;
+width: 100%;
+border-top: 5px var(--warm-50) solid;
+}
+
+/* Content Warning */ 
+
+ [data-pp-id="4"] {
+text-align:center;   }
+
+/* Section Break Styling */ 
+        .afghan-video-break{
+        width: 100%;
+        position: relative;
+        z-index: 1;
+    }
+
+
+
+     .afghan-title{
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+        padding-bottom: 1em;
+    }
+
+    .afghan-title svg{
+      width: 50%;
+      margin: 0 auto;
+      min-width: 190px;
+      max-width: 250px;
+    }
+
+        .afghan-break{
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: -3em;
+        display: flex;
+        position: absolute;
+        z-index: 100;
+    
+    }
+
+    .afghan-break .afghan-sub-date, .afghan-break .afghan-sub-place{
+        width: 50%;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .afghan-break-novid{
+      display: block;
+      margin: 0 auto;
+    }
+
+    .afghan-break-novid .main-title{
+
+      text-align: center;
+      width: 100%;
+   font-weight: 400;
+        text-transform: uppercase; 
+        letter-spacing: 3px;
+        font-size: var(--scale-2);
+        font-family: var(--fonts-sans);
+        color: var(--warm-30);
+    }
+
+
+  .afghan-sub-date .main-title, .afghan-sub-place .main-title{
+       font-weight: 400;
+        text-transform: uppercase; 
+        letter-spacing: 3px;
+        font-size: var(--scale-2);
+        font-family: var(--fonts-sans);
+        color: var(--warm-30);
+        filter: drop-shadow(0 0.2rem 0.25rem rgba(0, 0, 0, 0.9));
+
+    }
+
+     .afghan-break .afghan-sub-date .main-title{
+      text-align: left;
+      padding-left: 2em;
+     }
+
+    .afghan-break .afghan-sub-place .main-title{
+      text-align: right;
+      padding-right: 2em;
+     }
+
+    .afghan-title .afghan-chapter{
+        font-weight: 400;
+        width: 30%;
+        margin: 0 auto;
+        min-width: 150px;
+        max-width: 250px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+
+        padding: 5px 0px 5px 0px; 
+        color: var(--warm-30);
+        font-family: var(--fonts-sans);
+        font-size: var(--scale-2);
+
+    }
+
+    .afghan-title .afghan-head{
+        font-size: var(--scale3);
+        color: var(--warm-10);
+        font-weight: 700;
+        font-family: var(--fonts-serif);
+    }
+
+    @media screen and (max-width: 48em) {
+        .afghan-break{
+          margin-top: 1em;
+          margin-bottom: 1em;
+          text-align: center; 
+          display: block;
+          position: relative;
+        }
+
+         .afghan-break .afghan-sub-date .main-title, .afghan-break .afghan-sub-place .main-title{
+          width: 100%;
+          text-align: center;
+         }
+
+         html:not(.force-dark-mode) .afghan-break .afghan-sub-place .main-title, .afghan-break .afghan-sub-date .main-title{
+  color: var(--warm-60);
+}
+
+            .afghan-break .afghan-sub-date .main-title{
+      text-align: center;
+      padding-left: 0;
+      width: 100%;
+      filter: none;
+     }
+
+        .afghan-break .afghan-sub-date, .afghan-break .afghan-sub-place{
+        width: 100%;
+ 
+    }
+
+    .afghan-break .afghan-sub-place .main-title{
+      text-align: center;
+      padding-right: 0;
+         width: 100%;
+         filter: none;
+     }
+    }
+
+html:not(.force-dark-mode) .afghan-title .afghan-head{
+  color: var(--warm-70);
+}
+
+html:not(.force-dark-mode) .afghan-title .afghan-chapter, html:not(.force-dark-mode) .afghan-break-novid .main-title{
+  color: var(--warm-60);
+}
+
+html:not(.force-dark-mode) .bb-pull-quote__text p{
+  color: var(--warm-60);
+}
+
+
+
+    /* Fade In Image */ 
+
+.article-body figure img, 
+  .article-body figure video {
+    opacity: .05;
+    transition: opacity 1s linear;
+  }
+
+  .article-body figure img.fade-img--scrolled-into-view, 
+  .article-body figure video.fade-img--scrolled-into-view { 
+    opacity: 1; 
+  }
+
+</style>
+
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    document.documentElement.classList.add("force-dark-mode");
+  });
+</script>
+
+
+<script type="text/javascript">
+  if (window.innerWidth > 100) {
+
+  let openerMarkup = document.createElement("div");
+  openerMarkup.classList.add(
+    "opener__art",
+    "opener__art-start--1",
+    "opener__art-width--6"
+  );
+  openerMarkup.innerHTML = `
+ <div id="scroll-opener">
+
+    <div class="opener-scroll-line">
+    <span class="opener-scroll-line-el"></span>
+    <span class="opener-scroll-line-text">Scroll</span>
+    </div>
+    
+    <div class="scrolly scroll-item">
+
+      <div class="scrolly-image"> 
+         <video id="opener-video-1" class="opener-video active js-responsive-video-switch"
+        muted playsinline autoplay loop
+        poster="https://i.ibb.co/5sq6qC0/Boston-Night-mobile.jpg"
+        data-mobile-poster="https://i.ibb.co/5sq6qC0/Boston-Night-mobile.jpg"
+        data-desktop-poster="https://i.ibb.co/dWY5zRQ/Boston-Night-desktop.jpg"
+        >
+        <source type="video/mp4" src="https://d3rtz3mdbmjoag.cloudfront.net/wp-cmg/20230728/64c32614ac2d3801cbed4e44/file_1920x1080-5400-v4/high.m3u8" data-mobile-src="https://d3rtz3mdbmjoag.cloudfront.net/wp-cmg/20230728/64c32614ac2d3801cbed4e44/file_1920x1080-5400-v4/high.m3u8" data-desktop-src="https://d3rtz3mdbmjoag.cloudfront.net/wp-cmg/20230728/64c32614ac2d3801cbed4e44/file_1920x1080-5400-v4/high.m3u8">
+        </video>
+        <video id="opener-video-2" class="opener-video js-responsive-video-switch" 
+        muted playsinline autoplay loop
+        poster="https://i.ibb.co/vwPZ6q5/Screenshot-2023-08-13-at-7-34-42-PM-copy.jpg"
+        data-mobile-poster="https://i.ibb.co/vwPZ6q5/Screenshot-2023-08-13-at-7-34-42-PM-copy.jpg"
+        data-desktop-poster="https://i.ibb.co/WzjPTby/desktop-craigs.jpg"
+        >
+        <source type="video/mp4" src="https://d3rtz3mdbmjoag.cloudfront.net/wp-cmg/20230728/64c32614ac2d3801cbed4e44/file_1920x1080-5400-v4/high.m3u8" data-mobile-src="https://d3rtz3mdbmjoag.cloudfront.net/wp-cmg/20230728/64c32614ac2d3801cbed4e44/file_1920x1080-5400-v4/high.m3u8">
+        </video>
+        <video id="opener-video-3" class="opener-video js-responsive-video-switch" 
+        muted playsinline autoplay loop
+        poster="https://i.ibb.co/5BWHtPV/building-5578890-1280.jpg"
+        data-mobile-poster="https://i.ibb.co/5BWHtPV/building-5578890-1280.jpg"
+        data-desktop-poster="https://i.ibb.co/cJBqXw9/building-5578890-1280-2.jpg"
+        >
+        <source type="video/mp4" src="https://d3rtz3mdbmjoag.cloudfront.net/wp-cmg/20230728/64c32614ac2d3801cbed4e44/file_1920x1080-5400-v4/high.m3u8">
+        </video>
+           <video id="opener-video-4" class="opener-video js-responsive-video-switch" 
+        muted playsinline autoplay loop
+        poster="https://i.ibb.co/5BWHtPV/building-5578890-1280.jpg"
+        data-mobile-poster="https://i.ibb.co/5BWHtPV/building-5578890-1280.jpg"
+        data-desktop-poster="https://i.ibb.co/cJBqXw9/building-5578890-1280-2.jpg"
+        >
+        <source type="video/mp4" src="https://d3rtz3mdbmjoag.cloudfront.net/wp-cmg/20230728/64c32614ac2d3801cbed4e44/file_1920x1080-5400-v4/high.m3u8" data-mobile-src="https://d3rtz3mdbmjoag.cloudfront.net/wp-cmg/20230728/64c32614ac2d3801cbed4e44/file_1920x1080-5400-v4/high.m3u8">
+        </video>
+            <video id="opener-video-5" class="opener-video js-responsive-video-switch" 
+        muted playsinline autoplay loop
+        poster="https://i.ibb.co/Gp8B3wf/boston-day-mobile.png"
+        data-mobile-poster="https://i.ibb.co/Gp8B3wf/boston-day-mobile.png"
+        data-desktop-poster="https://i.ibb.co/Jn91ycf/boston-day-desktop.png"
+        >
+        <source type="video/mp4" src="https://d3rtz3mdbmjoag.cloudfront.net/wp-cmg/20230728/64c32614ac2d3801cbed4e44/file_1920x1080-5400-v4/high.m3u8" data-mobile-src="https://d3rtz3mdbmjoag.cloudfront.net/wp-cmg/20230728/64c32614ac2d3801cbed4e44/file_1920x1080-5400-v4/high.m3u8">
+        </video>
+      </div>
+
+
+
+      <div class="scrolly-text">
+        
+        <div class="step step0" data-step="1">
+          <br><br><p>For the thousands of people who move into Boston each year, the cost to move can be staggering.</p>
+          
+        </div>
+        
+        <div class="step step1" data-step="2">
+          <p>Would-be tenants often shell out first month, last month rent, security deposit — and a broker fee.</p>
+        </div>
+        <div class="step step2" data-step="3">
+            <p>Massachusetts is one of a handful of states — including New York and New Jersey — where tenants are expected to pay broker fees.</p>
+            <br><br><p>Even if they don't enlist a broker's help in the first place. </p>
+        </div>
+    <div class="step step3" data-step="4">
+          <p>Advocates say broker fees exacerbate housing instability and make it much harder to find housing in the highly competitive rental market. </p>
+        </div>
+        <div class="step step4 headline-holder .opener--grid" data-step="5">
+        </div>
+        
+      </div>
+    </div>
+
+
+
+    
+  </div>
+`;
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    document
+      .querySelector(".opener__art-wrapper")
+      .replaceChild(openerMarkup, document.querySelector(".opener__art"));
+
+
+      document.querySelector("#opener-video-1").play()
+
+      const headline = document.querySelector(".opener__topic-title-dek-wrapper")
+      const hedHolder = document.querySelector(".headline-holder")
+      const subhed = document.createElement("span");
+     
+     /* subhed.classList.add(
+        "subhed"
+      );
+      subhed.innerHTML = `The Kill and Capture Night Raids`*/
+      hedHolder.appendChild(subhed);
+      hedHolder.appendChild(headline);
+
+
+
+        
+
+
+
+  });
+  
+  
+}
+
+</script>
+
+<script src="https://unpkg.com/scrollama"></script>
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function() {
+
+      const scrollyOpener = document.querySelector("#scroll-opener .scroll-item");
+      const videos = scrollyOpener.querySelectorAll(".scrolly-image video");
+      const scrollySteps = scrollyOpener.querySelectorAll(".scrolly-text .step");
+
+
+
+        // initialize scrollama
+        const scroller = scrollama();
+        scroller
+          .setup({
+              step: scrollySteps,
+              offset: 0.9,
+          })
+          .onStepEnter((response) => {
+            let num = response.index+1
+           if (response.index < 5) {
+              var el = document.querySelector("#opener-video-"+num);
+              videos.forEach(function (item,i) {
+                item.classList.remove("active")
+                if (i == response.index) {
+                    item.classList.add("active");
+                } 
+              });
+              el.play();
+            }
+  
+          
+          })
+
+           .onStepExit((response) => {
+            
+           if (response.index == 1 && response.direction == "up") {
+            videos.forEach(function (item,i) {
+              item.classList.remove("active")
+            });
+            document.querySelector("#opener-video-1").classList.add("active");
+           }
+          })
+          
+          
+        window.addEventListener("resize", scroller.resize);
+
+        const elScroll = document.querySelector('.opener-scroll-line');
+   
+    window.addEventListener("scroll",function(){
+      if (window.pageYOffset > 100) {
+        elScroll.style.opacity = 0
+      }
+    });
+      });
+  </script>
+
+<script>
+window.addEventListener("DOMContentLoaded", (event) => {
+
+  const fadeScroll = new IntersectionObserver(
+    function (items, observer) {
+      items.forEach((item) => {
+        if (item.isIntersecting) {
+          item.target.classList.add("fade-img--scrolled-into-view");
+        } else {
+          item.target.classList.remove("fade-img--scrolled-into-view");
+        }
+      });
+    },
+    {
+      root: null,
+      rootMargin: "0px 0px -25% 0px",
+      threshold: 0.25,
+    }
+  );
+
+  document.querySelectorAll("figure img").forEach((item) => fadeScroll.observe(item));
+  document.querySelectorAll("figure video").forEach((item) => fadeScroll.observe(item));
+
+});
+
+</script>
+
+    <!--mastodon-->
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="all">
+
+<body id="body1" class="entry-type-article bg-white text-dark neutral-cool user-level--0 accent-orange" data-pp-location="v5 body">
+    
+            
+    
+
+<style>
+    .site-header__banner {
+        font-family: Graphik, sans-serif;
+        font-size: 13px;
+        line-height: 1.2;
+        position: relative;
+        z-index: 100;
+    }
+    @media screen and (min-width: 40em) {
+        .site-header__banner {
+            font-size: 15px;
+        }
+    }
+    a.site-header__banner-link {
+        align-items: center;
+        background: linear-gradient(
+            to right,
+            #e98406,
+            #cf176d,
+            #2074df
+        );
+        color: white;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        padding: 0.5em 1em;
+        text-decoration: none;
+        transition: unset;
+    }
+    .site-header__banner-link > * + * {
+        margin-left: 8px;
+    }
+    .site-header__banner-cta {
+        background: #da352b;
+        border-radius: 0.2em;
+        color: white;
+        display: inline;
+        font-size: 0.85em;
+        font-weight: 700;
+        padding: 0.5em 1em;
+        text-transform: uppercase;
+        text-align: center;
+        /* see here for smooth box-shadow calculation: https://shadows.brumm.af */
+        /*
+        box-shadow:
+            0 1.3px 1.3px rgba(0, 0, 0, 0.07),
+            0 4.5px 4.5px rgba(0, 0, 0, 0.042),
+            0 20px 20px rgba(0, 0, 0, 0.028)
+        ;
+        */
+    }
+    /*
+    .site-header__banner-copy {
+        display: none;
+    }
+    @media screen and (min-width: 50em) {
+        .site-header__banner-copy {
+            display: block;
+        }
+    }
+    */
+    /*
+    .site-header__banner-link:focus .site-header__banner-cta,
+    .site-header__banner-link:hover .site-header__banner-cta {
+        background: #9b0000;
+        color: white;
+    }
+    */
+
+    .site-header__banner-title {
+        padding-right: 0.25em;
+    }
+
+    @media screen and (min-width: 60em) {
+        .opener--grid {
+            /* Tweak full height to account for promo bar height */
+            grid-template-rows: minmax(calc(100vh - 2.25rem), auto) auto auto;
+        }
+    }
+    @media screen and (min-width: 60em) {
+        .opener--grid .opener__art.opener__art--inset,
+        .opener--grid .opener__art.opener__art--inset > img,
+        .opener--grid .opener__art.opener__art--inset > video {
+            /* Tweak full height to account for promo bar height */
+            max-height: calc( 100vh - 2.25rem - 2 * var(--opener-page-margins));
+        }
+    }
+</style>
+
+
+
+
+    <!-- Load SiteHeader variant based on variable -->
+
+
+        </div>
+</a></li></ul></div>
+            </nav>
+        </div>
+    
+</div>
+                        <!--svelte-component-end-->
+                            
+    
+<main class="content" id="main">
+
+        <article class="article center">
+
+        
+            <!-- Class assignment -->
+
+
+    
+
+                    
+                    
+
+
+
+
+<div class="opener  opener--grid opener--center opener--has-background opener--has-background-black opener--order-art-hed-dek opener--same-color-in-dark-mode" data-pp-location="article opener">
+
+            
+                <figure class="opener__art-wrapper">
+                        
+                            
+    
+
+
+
+
+<picture class="opener__art opener__art-start--1 opener__art-width--6">
+    <source media="(max-width: 48em)"
+        sizes="100vw"
+        srcset="https://i.ibb.co/Jn91ycf/boston-day-desktop.png?crop=focalpoint&amp;fit=crop&amp;fm=webp&amp;fp-x=0.5&amp;fp-y=0.5&amp;h=870&amp;q=75&amp;w=400&amp;s=53774a6aa1da2c5552be4ae76e62b056 400w, https://i.ibb.co/Jn91ycf/boston-day-desktop.png?crop=focalpoint&amp;fit=crop&amp;fm=webp&amp;fp-x=0.5&amp;fp-y=0.5&amp;h=1739&amp;q=75&amp;w=800&amp;s=97480c1af036a17c5160a30afbbcf561 800w, https://i.ibb.co/Jn91ycf/boston-day-desktop.png?crop=focalpoint&amp;fit=crop&amp;fm=webp&amp;fp-x=0.5&amp;fp-y=0.5&amp;h=2609&amp;q=75&amp;w=1200&amp;s=bac0f93cc582acd723e066874623e49d 1200w, https://i.ibb.co/Jn91ycf/boston-day-desktop.png?crop=focalpoint&amp;fit=crop&amp;fm=webp&amp;fp-x=0.5&amp;fp-y=0.5&amp;h=2826&amp;q=75&amp;w=1300&amp;s=7a7f1415f759f7f7fb0a0c80223d56ca 1300w, https://i.ibb.co/Jn91ycf/boston-day-desktop.png?crop=focalpoint&amp;fit=crop&amp;fm=webp&amp;fp-x=0.5&amp;fp-y=0.5&amp;h=3152&amp;q=75&amp;w=1450&amp;s=d9ff4d79475d26cd22fb806b56467566 1450w, https://i.ibb.co/Jn91ycf/boston-day-desktop.png?crop=focalpoint&amp;fit=crop&amp;fm=webp&amp;fp-x=0.5&amp;fp-y=0.5&amp;h=3478&amp;q=75&amp;w=1600&amp;s=0c40f84a6042dc941eb43a5d26f15b48 1600w"
+        >
+    </source>
+    <source media="(min-width: 48em) and (max-width: 60em)"
+        sizes="100vw"
+        srcset="https://i.ibb.co/Jn91ycf/boston-day-desktop.png?crop=focalpoint&amp;fit=crop&amp;fm=webp&amp;fp-x=0.5&amp;fp-y=0.5&amp;h=2133&amp;q=75&amp;w=1600&amp;s=b5050f967e8a66324ad28e4b2ca906b2 1600w, https://i.ibb.co/Jn91ycf/boston-day-desktop.png?crop=focalpoint&amp;fit=crop&amp;fm=webp&amp;fp-x=0.5&amp;fp-y=0.5&amp;h=2667&amp;q=75&amp;w=2000&amp;s=bd08e75a9c44674377ee2bb8d429012e 2000w"
+        >
+    </source>
+    <source media="(min-width: 60em)"
+        sizes="100vw"
+        srcset="https://i.ibb.co/Jn91ycf/boston-day-desktop.png?crop=focalpoint&amp;fit=crop&amp;fm=webp&amp;fp-x=0.5&amp;fp-y=0.5&amp;h=1067&amp;q=75&amp;w=1600&amp;s=2d0711433399ba12694a4a4ef75bec0f 1600w, https://i.ibb.co/Jn91ycf/boston-day-desktop.png?crop=focalpoint&amp;fit=crop&amp;fm=webp&amp;fp-x=0.5&amp;fp-y=0.5&amp;h=1333&amp;q=75&amp;w=2000&amp;s=dd9421ee6d97b78f0f3a720b574ab8c4 2000w, https://i.ibb.co/Jn91ycf/boston-day-desktop.png?crop=focalpoint&amp;fit=crop&amp;fm=webp&amp;fp-x=0.5&amp;fp-y=0.5&amp;h=1867&amp;q=75&amp;w=2800&amp;s=e04b67b67ce3291633abf684775561a1 2800w"
+        >
+    </source>
+    <img
+        src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27400%27%20height%3D%27870%27%20style%3D%27background%3Atransparent%27%2F%3E"
+        alt=""
+                fetchpriority="high"        />
+</picture>
+            
+            
+<figcaption class="attribution">
+        <span class="attribution__caption"></span>
+    
+        <span class="attribution__credit">
+        <span class="a11y">Credit: </span>
+        X
+    </span>
+    
+    
+    </figcaption>
+
+        </figure>
+        
+    
+    <div class="opener__topic-title-dek-wrapper  opener__text-start--1 opener__text-width--3 opener__topic-title-dek-wrapper--valign-bottom opener__topic-title-dek-wrapper--mobile-fullbleed">
+
+                    <span class="opener__topics  -is-over-bg opener__topics--light">
+            <a class="opener__topics-link  -is-over-bg opener__topics-link--light" href="https://github.com/ReporterMarina">Data Analysis</a>
+        </span>
+    
+    <h1 class="opener__hed  -is-over-bg opener__hed--light opener__hed--small" > One Reason Housing is so Expensive in Boston: Broker Fees 
+    </h1>
+
+    
+            <div class="article-meta-1  -is-over-bg article-meta-1--light">
+            <span class="article-meta-1__byline">
+                by <a class="name" href="https://github.com/ReporterMarina">Marina Villeneuve           </span>
+            <time class="article-meta-1__pubdate">
+                <time class="timestamp" datetime="2022-12-15EST12:00">Aug. 13, 2023, 12 p.m. EST</time>
+            </time>
+        </div>
+    
+    </div> <!-- Close .opener__topic-title-dek-wrapper -->
+
+        <div class="content"> <!-- not sure if this is the best way to reestablish the text column -->
+        <h2 class="opener__dek opener__dek--match-text-column" >            CIA-backed operations killed countless Afghan civilians, and the U.S. hasn&#039;t been held accountable. A reporter returns to investigate her past and unravel the legacy of the secretive Zero Units.
+        </h2>
+    </div>
+    
+</div>
+        
+<div class="article-meta-1
+     article-meta-1--center      article-meta-1--hide-byline " data-pp-location="article meta">
+
+
+    <div class="article-meta-1__section-actions
+         article-meta-1__section-actions--center     " data-pp-location="article story-tools">
+        <div class="share-tools" data-pp-location="share tools">
+    <ul class="share-tools__btn-list">
+        <li>
+            <textarea readonly class="-js-copy-textarea" aria-hidden="true" tabindex="-1">
+                https://www.propublica.org/article/afghanistan-night-raids-zero-units-lynzy-billing
+            </textarea>
+            <a class="btn btn--circular btn--icon-only -js-copy-btn" style="--button-color: var(--color-accent-50); --button-text-color: var(--color-bg)" href="#">
+                <span class="a11y">Copy</span>
+                <div class="btn__icon">
+                    <svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <title>Link</title>
+    <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"></path>
+    <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"></path>
+</svg>
+                </div>
+                <div class="-js-copy-tooltip -js-hide">
+                    <span>Link Copied!</span>
+                </div>
+            </a>
+        </li>
+        <li>
+            <div class="btn btn--outline btn--circular btn--icon-only dark-mode-control"
+                style="--button-color: var(--color-accent-50); --button-text-color: var(--color-bg)"                >
+                <label class="a11y" for="dark-mode-control__select">Change Appearance</label>
+                <select class="dark-mode-control__select" id="dark-mode-control__select" data-pp-change data-pp-category="change-mode">
+                    <option value="auto">Auto</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+                <span class="btn__icon dark-mode-control__icon dark-mode-control__icon--auto"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <title>Contrast</title>
+    <circle cx="12" cy="12" r="10"></circle>
+    <path fill="currentColor" d="M12 18a6 6 0 000-12v12z"></path>
+</svg>
+</span>
+                <span class="btn__icon dark-mode-control__icon dark-mode-control__icon--light"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <title>Sun</title>
+    <circle fill="currentColor" cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2"></path>
+    <path d="M12 20v2"></path>
+    <path d="M5 5l1.5 1.5"></path>
+    <path d="M17.5 17.5L19 19"></path>
+    <path d="M2 12h2"></path>
+    <path d="M20 12h2"></path>
+    <path d="M5 19l1.5-1.5"></path>
+    <path d="M17.5 6.5L19 5"></path>
+</svg>
+</span>
+                <span class="btn__icon dark-mode-control__icon dark-mode-control__icon--dark"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <title>Moon</title>
+    <path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+</svg>
+</span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+            </div>
+
+    </div>
+
+
+            </div>
+
+    </div>
+     
+
+    
+    <div class="article-body" data-pp-location="article body" >
+
+        
+        
+        
+
+
+
+
+                    
+
+<figure
+    data-pp-id="3"
+    data-pp-blocktype="embed"
+    class="bb-embed size08 center  wide-sm wrap
+                ">
+
+    
+
+
+                        <!-- CHAPTER 1-->
+
+
+        
+    
+                    
+<p data-pp-blocktype="copy" data-pp-id="5.0"><strong>In nearly every state in the U.S.,</strong> landlords who need assistance renting out apartments pay brokers for their help themselves. </p>
+        
+    
+                        
+
+
+   
+ 
+        
+    
+                    
+<p data-pp-blocktype="copy" data-pp-id="7.0">Nearly everywhere else in the nation, landlords pay brokers themselves.</p>
+        
+    
+                    
+<p data-pp-blocktype="copy" data-pp-id="8.0">Fair housing advocates say that broker fees exacerbate housing instability and make it even harder for low-to-middle-income tenants to find housing in the highly competitive rental market.</p>
+        
+    
+                    
+<p data-pp-blocktype="copy" data-pp-id="9.0"></p>
+        
+    
+                    
+<p data-pp-blocktype="copy" data-pp-id="10.0"></p>
+        
+    
+ 
+        
+    
+                    
+<p data-pp-blocktype="copy" data-pp-id="12.0"></p>
+        
+    
+                    
+<p data-pp-blocktype="copy" data-pp-id="13.0"></p>
+        
+    
+                    <figure
+    data-pp-id="14"
+    data-pp-blocktype="pull-quote"
+    class="bb-pull-quote bb--border-top
+        size04 left out02 wide-sm wrap">
+
+    <blockquote class="bb-pull-quote__text">
+        <p>QUOTE</p>
+
+    </blockquote>
+    
+</figure>
+        
+    
+                    
+<p data-pp-blocktype="copy" data-pp-id="15.0"></p>
+        
+    
+                    
+<p data-pp-blocktype="copy" data-pp-id="16.0"></p>
+        
+    
+                    
+<p data-pp-blocktype="copy" data-pp-id="17.0"></p>
+        
+    
+                    
+<p data-pp-blocktype="copy" data-pp-id="18.0"></p>
+        
+    
+                    
+
+<figure
+    data-pp-id="20"
+    data-pp-blocktype="embed"
+    class="bb-embed size10 center  wide-md 
+                ">
+
+    
+
+
+  
+                    
+
+<figure
+    data-pp-id="48"
+    data-pp-blocktype="embed"
+    class="bb-embed size10 center  wide-sm wrap
+                ">
+
+    
+
+        
+    
+                    <h3    data-pp-id="263"
+    data-pp-blocktype="heading"
+    class="bb-heading bb-heading--explanatory-hed"
+    id="how-we-reported-this-story"
+    >
+    How We Reported This Story
+</h3>
+
+        
+    
+                    <aside
+    data-pp-id="264"
+    data-pp-blocktype="aside"
+    class="bb-aside size08 center out02 wide-sm wrap
+                ">
+
+    <p><strong>Sources</strong></p>
+<p> </p>
+<p></p>
+<p></p>
+
+
+</aside>
+        
+    
+                    <aside
+    data-pp-id="265"
+    data-pp-blocktype="aside"
+    class="bb-aside size08 center out02 wide-sm wrap
+                ">
+
+    <p><strong>Methodology</strong></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p> </p>
+<p></p>
+<p></p>
+
+
+</aside>
+        
+    
+ 
+
+
+        
+                    
+<div class="story-card story-card--standard">
+    
+    
+
+                    
+                    
+    
+            </div>
+</div>
+                    
+
+
+    
+<style>
+
+    /* re-assert som CSS Custom Properties from v5 */
+    .admin-shortcuts {
+        --fonts-sans: "Graphik", sans-serif;
+        --scale0: 1rem;
+        --scale-1: 13px;
+        --scale-2: 11px;
+        --scale-3: 9px;
+        --spacing-2: 4px;
+        --spacing-1: 8px;
+        --spacing0: 16px;
+        --spacing1: 24px;
+        --spacing2: 32px;
+        --spacing3: 64px;
+    }
+
+    .admin-shortcuts {
+        position: fixed;
+        z-index: 10000;
+        bottom: 0;
+        right: var(--spacing0);
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+        gap: var(--spacing0);
+        padding: var(--spacing-1) var(--spacing0);
+        background-color: black;
+        color: white;
+        font-size: var(--scale-1);
+        font-family: var(--fonts-sans);
+        border-radius: 0.25rem 0.25rem 0 0;
+    }
+
+    .admin-shortcuts__link {
+        display: inline-block;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        gap: 0.33em;
+    }
+
+    .admin-shortcuts__user:before {
+        content: "";
+        width: 0.66em;
+        height: 0.66em;
+        border-radius: 100%;
+        background-color: #14b84f; /* green 50 */
+    }
+
+    .admin-shortcuts__user {
+        padding-right: calc(var(--spacing-2) * 4);
+        border-right: 1px solid hsla(0, 0%, 100%, 0.2);
+    }
+
+    .admin-shortcuts__user:before,
+    .admin-shortcuts__icon {
+        align-self: center;
+    }
+
+    .admin-shortcuts__icon {
+        width: 1.1em;
+        height: 1.1em;
+    }
+</style>
+
+
+    
+</footer>
+                        <!--svelte-component-end-->
+                        
+    <script src="https://assets.propublica.org/static/prod/v5/js/main.92cef896.js"></script>
+
+    <div class="modal-republish | modal -js-hide" tabindex="-1" role="dialog" title="Republish Story" data-pp-location="republish modal">
+    <div class="content">
+
+    <div class="modal__header">
+        <a class="modal__close-button btn btn--icon-only btn--transparent" style="--button-size: var(--scale3)" href="#" tabindex="0"
+            role="button" aria-labelledby="modal-republish__hed" aria-describedby="modal-republish__intro" data-pp-action="republish close">
+            <div class="btn__icon" aria-hidden="true">
+                <svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <title>Close</title>
+    <line x1="18" y1="6" x2="6" y2="18"></line>
+    <line x1="6" y1="6" x2="18" y2="18"></line>
+</svg>
+            </div>
+            <span class="a11y">Close this dialogue</span>
+        </a>
+    </div>
+    <!-- end .collapsible-header -->
+
+
+
+
+
+            <script>
+        // Google Tag Manager
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-K8BNLGX');
+        // End Google Tag Manager
+
+        PP.utils.loadJS('https://ak.sail-horizon.com/spm/spm.v1.min.js',function() {
+            while(!window.hasOwnProperty("Sailthru")) {
+                setTimeout(Function.prototype(), 500);
+            }
+            Sailthru.init({ "customerId" : "c1d320b4976cc13366759531bf948c3a" });
+        });
+
+            </script>
+    <!-- GA4 (for no-JS pages) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K8BNLGX"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    
+    <script>PP.utils.loadJS('https://www.google.com/recaptcha/api.js?onload=grecaptchaLoaded&render=6LdI1rAUAAAAACI0GsFv-yRpC0tPF5ECiIMDUz2x');</script>
+
+  
+    <!-- Begin Convert Experiences code-->
+<script type="text/javascript" defer src="//cdn-4.convertexperiments.com/js/1004759-1004714.js"></script>
+<!-- End Convert Experiences code -->
+
+ 
+    <!-- Iterate Code -->
+
+<!-- Iterate baseline styles: additional styles included in pp-v5-shared -->
+<style>
+.iterate__container {
+    font-family: var(--fonts-sans, "graphik") !important;
+}
+</style>
+
+
+
+    
+<script type="application/ld+json">{"@context":"http://schema.org","@graph":[{"@type":"NewsArticle","author":{"@id":""},"copyrightHolder":{"@id":""},"copyrightYear":"2022","creator":["Lynzy Billing","Mauricio Rodríguez Pons"],"dateModified":"2023-01-05T10:29:18-05:00","datePublished":"2022-12-15T12:00:00-05:00","description":"A look at the prevalence of broker fees in Boston area.","image":{"@type":"ImageObject","url":"https://i.ibb.co/Jn91ycf/boston-day-desktop.png?crop=focalpoint&fit=crop&fp-x=0.5&fp-y=0.5&h=630&imgixProfile=propublicaAssets&q=90&w=1200&s=dfa2d7716f75416b154b51e977c5db8a"},"inLanguage":"en-us","mainEntityOfPage":"https://www.propublica.org/article/afghanistan-night-raids-zero-units-lynzy-billing","name":"The Impact of Broker Fees","publisher":{"@id":"https://www.github.com#reportermarina"},"thumbnailUrl":"https://i.ibb.co/Jn91ycf/boston-day-desktop.png?crop=focalpoint&fit=crop&fp-x=0.5&fp-y=0.5&h=630&imgixProfile=propublicaAssets&q=90&w=1200&s=dfa2d7716f75416b154b51e977c5db8a","url":"https://www.propublica.org/article/afghanistan-night-raids-zero-units-lynzy-billing"},{"@id":"","@type":"NewsMediaOrganization","address":{"@type":"PostalAddress","addressCountry":"US","addressLocality":"MA","addressRegion":"MA","postalCode":"00000","streetAddress":""},"description":"","email":"","name":"","sameAs":["https://twitter.com/","https://www.facebook.com//","https://en.wikipedia.org/wiki/","https://www.youtube.com/user/","https://github.com/","https://www.linkedin.com/company/","https://www.instagram.com/","https://www.pinterest.com/","https://vimeo.com/"],"telephone":"1-212-514-5250","url":"https://www.example.com"},{"@id":"#creator","@type":"Organization"},{"@type":"BreadcrumbList","description":"Breadcrumbs list","itemListElement":[{"@type":"ListItem","item":"","name":"Homepage","position":1},{"@type":"ListItem","item":"https://www.propublica.org/article/afghanistan-night-raids-zero-units-lynzy-billing","name":"The Night Raids","position":2}],"name":"Breadcrumbs"}]}</script></body>
+</html>

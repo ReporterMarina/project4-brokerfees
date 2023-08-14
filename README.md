@@ -37,12 +37,12 @@
 <br>
 <br>
 <h1>A section about what new skills, approaches, etc you used, or where you grew the most during the project</h1>
-<p> I gained skills in web scraping with Python, browser automation in Selenium, approaching machine learning models with Hugging Face and using R to more quickly and efficiently analyze data.  </p>
+<p> I gained skills in web scraping with Python, browser automation in Selenium, approaching machine learning models with Hugging Face and using R to more quickly and efficiently analyze data. I adapted web design from <a href="http://propublica.org/…">ProPublica</a> for my website showcasing my work as well. </p>
 
 <br>
 <br>
 <h1>A section about things you tried to do or wanted to do but did not have the skills/time (but if you have more time you might do)</h1>
-<p> It took many hours to gain confidence and expertise with Selenium through trial and error. With more time, it'd be great to do statistical analysis of the listings to come up with a representative sample so I could look at pricing with more precision and nuance. I would love to also get better at training the machine learning models to help with analyzing large amounts of text. 
+<p> It took many hours to gain confidence and expertise with Selenium through trial and error. With more time, it'd be great to do statistical analysis of the listings to come up with a representative sample so I could look at pricing with more precision and nuance. I would love to also get better at training the machine learning models to help with analyzing large amounts of text. I also spend substantial time trying to work on my layout for my project page. The video is buggy on various browsers mobile vs desktop. But at least the text appears as desired so I'm not too worried about it. My bigger concern was making sure the margins are consistent and images were appropriately sized/responsively sized this time around.
 </p>
 
 

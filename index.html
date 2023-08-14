@@ -1217,7 +1217,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         
     
  
-
+</main><!-- end .content -->
 
 
     
@@ -1291,25 +1291,92 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 
     
-</footer>
                         <!--svelte-component-end-->
                         
     <script src="https://assets.propublica.org/static/prod/v5/js/main.92cef896.js"></script>
 
+   <div class="modal-republish | modal -js-hide" tabindex="-1" role="dialog" title="Republish Story" data-pp-location="republish modal">
+    <div class="content">
 
     <div class="modal__header">
         <a class="modal__close-button btn btn--icon-only btn--transparent" style="--button-size: var(--scale3)" href="#" tabindex="0"
             role="button" aria-labelledby="modal-republish__hed" aria-describedby="modal-republish__intro" data-pp-action="republish close">
             <div class="btn__icon" aria-hidden="true">
                 <svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-
+    <title>Close</title>
+    <line x1="18" y1="6" x2="6" y2="18"></line>
+    <line x1="6" y1="6" x2="18" y2="18"></line>
 </svg>
             </div>
-
+            <span class="a11y">Close this dialogue</span>
         </a>
     </div>
     <!-- end .collapsible-header -->
 
+    <div class="modal-republish__content-wrapper">
+
+        <div class="modal__content modal-republish__content">
+
+            <div class="modal-republish__instructions republish-instructions">
+
+                <h3 id="modal-republish__hed">Republish This Story for Free</h3>
+
+                <p class="modal-republish__license"><a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/3.0/">Creative Commons License (CC BY-NC-ND 3.0)</a></p>
+
+                <hr/>
+
+                <p id="modal-republish__intro" class="modal-republish__intro">Thank you for your interest in republishing this story. You are free to republish it so long as you do the following:</p>
+
+                <ul>
+                    <li>You have to credit <em>ProPublica and any co-reporting partners</em>. In the byline, we prefer “Author Name, Publication(s).” At the top of the text of your story, include a line that reads: “This story was originally published by ProPublica.” You must link the word “ProPublica” to the original URL of the story.</li>
+
+                    <li>If you’re republishing online, you must link to the URL of this story on propublica.org, include all of the links from our story, including our newsletter sign up language and link, and use our <a href="/pixelping">PixelPing tag</a>.</li>
+
+                    <li>If you use canonical metadata, please use the ProPublica URL. For more information about canonical metadata, <a href="https://support.google.com/webmasters/answer/139066?hl=en">refer to this Google SEO link</a>.</li>
+
+                    <li>You can’t edit our material, except to reflect relative changes in time, location and editorial style. (For example, “yesterday” can be changed to “last week,” and “Portland, Ore.” to “Portland” or “here.”)</li>
+
+                    <li>You cannot republish our photographs or illustrations without specific permission. Please contact <a href="/cdn-cgi/l/email-protection#157870717c74677c727d61665565677a656077797c76743b7a6772"><span class="__cf_email__" data-cfemail="fe939b9a979f8c9799968a8dbe8e8c918e8b9c92979d9fd0918c99">[email&#160;protected]</span></a>.</li>
+
+                    <li>It’s okay to put our stories on pages with ads, but not ads specifically sold against our stories. You can’t state or imply that donations to your organization support ProPublica’s work.</li>
+
+                    <li>You can’t sell our material separately or syndicate it. This includes publishing or syndicating our work on platforms or apps such as Apple News, Google News, etc.</li>
+
+                    <li>You can’t republish our material wholesale, or automatically; you need to select stories to be republished individually. (To inquire about syndication or licensing opportunities, contact <a href="/cdn-cgi/l/email-protection#771b1e141219041e1910370705180702151b1e141659180510"><span class="__cf_email__" data-cfemail="2844414b4d465b41464f68585a47585d4a44414b4906475a4f">[email&#160;protected]</span></a>.)</li>
+
+                    <li>You can’t use our work to populate a website designed to improve rankings on search engines or solely to gain revenue from network-based advertisements.</li>
+
+                    <li>We do not generally permit translation of our stories into another language.</li>
+
+                    <li>Any website our stories appear on must include a prominent and effective way to contact you.</li>
+
+                    <li>If you share republished stories on social media, we’d appreciate being tagged in your posts. We have official accounts for ProPublica on <a href="https://twitter.com/propublica">Twitter</a>, <a href="https://www.facebook.com/propublica">Facebook</a> and <a href="https://www.instagram.com/propublica/">Instagram</a>.</li>
+
+                </ul>
+            </div>
+
+            <div class="modal-republish__section-copy">
+                <textarea readonly class="-js-copy-textarea" aria-hidden="true" tabindex="-1"></textarea>
+                <a href="#" class="btn -js-copy-btn" style="--button-color: var(--color-accent-50)" data-pp-action="republish copy">Copy HTML</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+</div>
+<!-- end #modal-republish -->
+
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script
+    data-syndicate
+    src="https://assets.propublica.org/static/prod/v5/js/deploy/syndicated-newsletter-v1.2.0.js"
+    data-delay="3"
+    data-endpoint="https://www.propublica.org/partials/newsletter-roadblock-big-story.html"
+    data-stylesheet="https://assets.propublica.org/static/prod/v5/css/deploy/syndicated-newsletter.css"
+    data-target="l/125411/2019-04-26/6m938v">
+</script>
 
 
 
@@ -1348,12 +1415,38 @@ window.addEventListener("DOMContentLoaded", (event) => {
 <!-- Iterate baseline styles: additional styles included in pp-v5-shared -->
 <style>
 .iterate__container {
-    font-family: 'Tinos', serif;;
+    font-family: var(--fonts-sans, "graphik") !important;
 }
 </style>
 
+<script>
 
+// Iterate setup script
+window.iterateSettings = {
+    apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55X2lkIjoiNjJmM2M2ZGNjYmVhNDQwMDAxNDZmMjRjIiwiaWF0IjoxNjYwMTQzMzI1fQ.HJYYZWnRLo7nKQHPteT9eeNeXePWXpYAyhaNyFAES-Y',
+};
+(function(i,t,e,r,a){if(t.getElementById(r)){return}
+i.IterateObjectName=a;var z=function(){z.c(arguments)};z.q=[];
+z.c=function(args){z.q.push(args)};i[a]=z;
+function l() {var js,fjs=t.getElementsByTagName(e)[0];js=t.createElement(e);js.id=r;js.async=1;js.src="https://platform.iteratehq.com/loader.js";fjs.parentNode.insertBefore(js,fjs)};
+if(t.readyState==="complete") {l();} else if(i.attachEvent) {i.attachEvent('onload', l);} else{i.addEventListener('load', l, false);}
+}(window, document,'script','iterate-js','Iterate'));
 
+// Start Iterate: this will check the server to see if a survey should be displayed
+Iterate('install')
+
+// Pass custom properties to Iterate: the 2nd parameter is user-level data, the 3rd parameter is response-level data
+var url = new URL(window.location.href);
+Iterate('identify', null, {
+    canonical: 'https://www.propublica.org/article/afghanistan-night-raids-zero-units-lynzy-billing',
+    utm_campaign: url.searchParams.get("utm_campaign"),
+    utm_medium: url.searchParams.get("utm_medium"),
+    utm_source: url.searchParams.get("utm_source")
+})
+
+</script>
+
+<!-- End Iterate Code -->
     
 <script type="application/ld+json">{"@context":"http://schema.org","@graph":[{"@type":"NewsArticle","author":{"@id":""},"copyrightHolder":{"@id":""},"copyrightYear":"2022","creator":["Lynzy Billing","Mauricio Rodríguez Pons"],"dateModified":"2023-01-05T10:29:18-05:00","datePublished":"2022-12-15T12:00:00-05:00","description":"A look at the prevalence of broker fees in Boston area.","image":{"@type":"ImageObject","url":"https://i.ibb.co/Jn91ycf/boston-day-desktop.png?crop=focalpoint&fit=crop&fp-x=0.5&fp-y=0.5&h=630&imgixProfile=""&q=90&w=1200&s=dfa2d7716f75416b154b51e977c5db8a"},"inLanguage":"en-us","mainEntityOfPage":"https://reportermarina.github.io/project4-brokerfees/","name":"The Impact of Broker Fees","publisher":{"@id":"https://www.github.com#reportermarina"},"thumbnailUrl":"https://i.ibb.co/Jn91ycf/boston-day-desktop.png?crop=focalpoint&fit=crop&fp-x=0.5&fp-y=0.5&h=630&imgixProfile=Assets&q=90&w=1200&s=dfa2d7716f75416b154b51e977c5db8a","url":"https://reportermarina.github.io/project4-brokerfees/"},{"@id":"","@type":"NewsMediaOrganization","address":{"@type":"PostalAddress","addressCountry":"US","addressLocality":"MA","addressRegion":"MA","postalCode":"00000","streetAddress":""},"description":"","email":"","name":"","sameAs":["https://twitter.com/","https://www.facebook.com//","https://en.wikipedia.org/wiki/","https://www.youtube.com/user/","https://github.com/","https://www.linkedin.com/company/","https://www.instagram.com/","https://www.pinterest.com/","https://vimeo.com/"],"telephone":"1-212-514-5250","url":"https://www.example.com"},{"@id":"#creator","@type":"Organization"},{"@type":"BreadcrumbList","description":"Breadcrumbs list","itemListElement":[{"@type":"ListItem","item":"","name":"Homepage","position":1},{"@type":"ListItem","item":"https://reportermarina.github.io/project4-brokerfees/","name":"Broker Fees","position":2}],"name":"Breadcrumbs"}]}</script></body>
 </html>

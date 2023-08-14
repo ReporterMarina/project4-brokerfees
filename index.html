@@ -1153,7 +1153,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 <br>        
 <br>    
                     
-<p data-pp-blocktype="copy" data-pp-id="10.0"></p> First, some data on rental prices in Boston I gathered from hundreds of listings on Hotpads.com. </p> 
+<p data-pp-blocktype="copy" data-pp-id="10.0"></p> First, some data on rental prices in Boston I gathered from hundreds of listings on a popular apartment rental website. </p> 
 <br>
 <p> For this part of the analysis, I looked at the distribution of rental prices for the roughly 450 listings that explicitly said whether or not a broker's fee was required. Only listings created in a 30-day period from early July to August were included - right ahead of the incredibly busy September move-in season. </p>
 <br>        
@@ -1177,26 +1177,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
 <br>
 <br><p data-pp-blocktype="copy" data-pp-id="13.0">There's little to no publically available data about the prevalance of broker fees in the U.S. Overall, the data I looked at suggests that apartment listings that mention broker fees are common in the greater Boston area. And, more often then not, the listings state that broker fees are required. </p>
 
-<br><p data-pp-blocktype="copy" data-pp-id="13.0">For a deep dive into broker fees - including current legislation to regulate the practice, what brokers must disclose, how often the City of Boston is getting complaints about broker fees and a look at New York City's short-lived reprieve from broker fees - check out <a href="https://www.boston25news.com/news/local/massachusetts-could-allow-cities-regulate-costly-broker-fees-tenants/NCQUFYEBLZHSVFD6ZSGPLY6MLM/"> my investigation for a local Boston television station. </a></p>
+<br><p data-pp-blocktype="copy" data-pp-id="13.0">For a deep dive into broker fees - including current legislation to regulate the practice, what brokers must disclose, how often the City of Boston is getting complaints about broker fees and a look at New York City's short-lived reprieve from broker fees - check out <a href="https://www.boston25news.com/news/local/massachusetts-could-allow-cities-regulate-costly-broker-fees-tenants/NCQUFYEBLZHSVFD6ZSGPLY6MLM/"> my investigation for Boston 25, a local Boston television station. </a></p>
 
     
-
-        
-    
-                    
-<p data-pp-blocktype="copy" data-pp-id="15.0"></p>
-        
-    
-                    
-<p data-pp-blocktype="copy" data-pp-id="16.0"></p>
-        
-    
-                    
-<p data-pp-blocktype="copy" data-pp-id="17.0"></p>
-        
-    
-                    
-<p data-pp-blocktype="copy" data-pp-id="18.0"></p>
         
     
                     
@@ -1241,12 +1224,12 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 ">
 
     <p><strong>Methodology</strong></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p> </p>
-<p></p>
+<p></p> I used Python and Selenium to scrape listings from dozens of pages of a rental website. I filtered for the most recent 30 days and for the greater Boston Area, including Cambridge and Somerville.
+<p></p> I then used Selenium to go through each URL one-by-one to scrape rental cost, beds, bath and rental description data.  
+<p></p> Then, I merged the output and used my dataset to train Hugging Face to create a machine learning model to help me start categorizing listings that included broker fees and similar phrases like realty fees.
+<p></p> I ended up going through hundreds of listings myself to verify how many required broker fees or not.
+<p> </p> At that point, I used R to analyze the data.
+<p></p> For a more detailed breakdown and look at my coding process, check out the <a href="https://github.com/ReporterMarina/project4-brokerfees"> ReadMe on my Github </a>.
 <p></p>
 
 
